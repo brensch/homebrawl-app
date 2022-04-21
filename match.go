@@ -1,4 +1,4 @@
-package main
+package homebrawlapp
 
 import (
 	"sync"
@@ -33,7 +33,7 @@ func (g *Game) StartMatch() {
 
 	g.mu.Lock()
 	g.currentMatch = match
-	g.currentView = viewTeamSelection
+	g.CurrentView = ViewTeamSelection
 	g.mu.Unlock()
 
 	// set

@@ -1,4 +1,4 @@
-package main
+package homebrawlapp
 
 import (
 	"image/color"
@@ -13,8 +13,8 @@ type Menu struct {
 
 func InitMenu() *Menu {
 
-	startGameButton := InitButton(float64(screenWidth)/4, float64(screenHeight)/4, screenWidth/2, screenHeight/4, "start", color.White, viewGameResult)
-	settingsButton := InitButton(float64(screenWidth)/4, float64(screenHeight)/2, screenWidth/2, screenHeight/4, "settings", color.White, viewOptions)
+	startGameButton := InitButton(float64(ScreenWidth)/4, float64(ScreenHeight)/4, ScreenWidth/2, ScreenHeight/4, "start", color.White, ViewGameResult)
+	settingsButton := InitButton(float64(ScreenWidth)/4, float64(ScreenHeight)/2, ScreenWidth/2, ScreenHeight/4, "settings", color.White, ViewOptions)
 
 	return &Menu{
 		buttons: []*Button{
@@ -22,15 +22,15 @@ func InitMenu() *Menu {
 			settingsButton,
 		},
 	}
-	// menu := ebiten.NewImage(screenWidth/2, screenHeight/2)
+	// Menu := ebiten.NewImage(ScreenWidth/2, ScreenHeight/2)
 
 }
 
 func (g *Game) DrawMenu(screen *ebiten.Image) {
 
-	// fmt.Println(screenHeight, screenWidth)
+	// fmt.Println(ScreenHeight, ScreenWidth)
 
-	for _, button := range g.menu.buttons {
+	for _, button := range g.Menu.buttons {
 		screen.DrawImage(button.image, button.opts)
 	}
 
@@ -38,13 +38,13 @@ func (g *Game) DrawMenu(screen *ebiten.Image) {
 
 func (g *Game) UpdateMenu() {
 
-	// screenWidth, screenHeight := g.Layout()
+	// ScreenWidth, ScreenHeight := g.Layout()
 
-	// fmt.Println(screenHeight, screenWidth)
+	// fmt.Println(ScreenHeight, ScreenWidth)
 
 	cursorX, cursorY := ebiten.CursorPosition()
 
-	for _, button := range g.menu.buttons {
+	for _, button := range g.Menu.buttons {
 		if button.LocationInside(cursorX, cursorY) {
 			button.image = button.highlightedImage
 			if inpututil.IsMouseButtonJustPressed(ebiten.MouseButtonLeft) {

@@ -1,4 +1,4 @@
-package main
+package homebrawlapp
 
 import (
 	"bytes"
@@ -37,11 +37,11 @@ func (g *Game) DrawGameResult(screen *ebiten.Image) {
 			continue
 		}
 
-		applianceSquare := ebiten.NewImage(g.applianceDimension, g.applianceDimension)
+		applianceSquare := ebiten.NewImage(g.ApplianceDimension, g.ApplianceDimension)
 		op := &ebiten.DrawImageOptions{}
 
 		// add 1 to y for house
-		imageX, imageY := float64(appliance.State().Location.X)*float64(g.applianceDimension), float64(appliance.State().Location.Y+1)*float64(g.applianceDimension)
+		imageX, imageY := float64(appliance.State().Location.X)*float64(g.ApplianceDimension), float64(appliance.State().Location.Y+1)*float64(g.ApplianceDimension)
 		// fmt.Println(appliance.Type(), imageX, imageY)
 		op.GeoM.Translate(imageX, imageY)
 		// op.ColorM.Apply(color.White)
@@ -59,37 +59,37 @@ func (g *Game) DrawGameResult(screen *ebiten.Image) {
 	}
 
 	// draw events sidepanel
-	eventsSquare := ebiten.NewImage(g.applianceDimension*2, g.applianceDimension*2)
+	eventsSquare := ebiten.NewImage(g.ApplianceDimension*2, g.ApplianceDimension*2)
 	eventsString := bytes.NewBuffer(nil)
 	for _, event := range g.states[g.turn].Events {
 		eventsString.WriteString(fmt.Sprintf("%s - %d,%d\n", event.Type(), event.Base().Target.X, event.Base().Target.Y))
 	}
 
 	op := &ebiten.DrawImageOptions{}
-	op.GeoM.Translate(float64(3*g.applianceDimension), 0)
+	op.GeoM.Translate(float64(3*g.ApplianceDimension), 0)
 	text.Draw(eventsSquare, eventsString.String(), mplusNormalFont, 0, mplusNormalFont.Metrics().Height.Ceil(), color.White)
 	screen.DrawImage(eventsSquare, op)
 
 	if int(g.turn) == len(g.states)-1 {
-		resultSquare := ebiten.NewImage(g.applianceDimension*2, g.applianceDimension*2)
-		op.GeoM.Translate(float64(3*g.applianceDimension), 0)
+		resultSquare := ebiten.NewImage(g.ApplianceDimension*2, g.ApplianceDimension*2)
+		op.GeoM.Translate(float64(3*g.ApplianceDimension), 0)
 		text.Draw(resultSquare, "lumb", mplusNormalFont, 0, mplusNormalFont.Metrics().Height.Ceil(), color.White)
 
 		screen.DrawImage(resultSquare, op)
 	}
 
 	// draw houses
-	upHouse := ebiten.NewImage(g.applianceDimension*3, g.applianceDimension)
+	upHouse := ebiten.NewImage(g.ApplianceDimension*3, g.ApplianceDimension)
 	upHouse.Fill(upColour)
 	upHouseOp := &ebiten.DrawImageOptions{}
 	upHouseState := fmt.Sprintf("Team UP\nhealth: %d", houses[1].Health)
 	text.Draw(upHouse, upHouseState, mplusNormalFont, 0, mplusNormalFont.Metrics().Height.Ceil(), color.Black)
 	screen.DrawImage(upHouse, upHouseOp)
 
-	downHouse := ebiten.NewImage(g.applianceDimension*3, g.applianceDimension)
+	downHouse := ebiten.NewImage(g.ApplianceDimension*3, g.ApplianceDimension)
 	downHouse.Fill(downColour)
 	downHouseOp := &ebiten.DrawImageOptions{}
-	downHouseOp.GeoM.Translate(0, float64(7*g.applianceDimension))
+	downHouseOp.GeoM.Translate(0, float64(7*g.ApplianceDimension))
 	downHouseState := fmt.Sprintf("Team DOWN\nhealth: %d", houses[0].Health)
 	text.Draw(downHouse, downHouseState, mplusNormalFont, 0, mplusNormalFont.Metrics().Height.Ceil(), color.Black)
 

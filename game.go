@@ -1,27 +1,23 @@
-package main
+package homebrawlapp
 
 import (
-	"log"
+	"image/color"
 	"sync"
 
+	"github.com/brensch/smarthome"
+	"github.com/hajimehoshi/ebiten/examples/resources/fonts"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/examples/resources/fonts"
 	"golang.org/x/image/font"
 	"golang.org/x/image/font/opentype"
-
-	"github.com/brensch/smarthome"
-
-	"image/color"
-	_ "image/png"
 )
 
 type view int
 
 const (
-	viewMenu view = iota
-	viewOptions
-	viewTeamSelection
-	viewGameResult
+	ViewMenu view = iota
+	ViewOptions
+	ViewTeamSelection
+	ViewGameResult
 )
 
 // var square *ebiten.Image
@@ -34,11 +30,11 @@ type Game struct {
 	result   int8
 	turn     int8
 
-	menu *Menu
+	Menu *Menu
 
-	applianceDimension int
+	ApplianceDimension int
 
-	currentView view
+	CurrentView view
 
 	currentMatch *match
 
@@ -91,12 +87,12 @@ func init() {
 
 func (g *Game) Update() error {
 
-	switch g.currentView {
-	case viewMenu:
+	switch g.CurrentView {
+	case ViewMenu:
 		g.UpdateMenu()
-	case viewGameResult:
+	case ViewGameResult:
 		g.UpdateGameResult()
-	case viewTeamSelection:
+	case ViewTeamSelection:
 		g.UpdateTeamSelection()
 	}
 	// g.Text = fmt.Sprint(ebiten.CurrentFPS())
@@ -106,17 +102,17 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
-	switch g.currentView {
-	case viewMenu:
+	switch g.CurrentView {
+	case ViewMenu:
 		g.DrawMenu(screen)
-	case viewTeamSelection:
+	case ViewTeamSelection:
 		g.DrawTeamSelection(screen)
-	case viewGameResult:
+	case ViewGameResult:
 		g.DrawGameResult(screen)
 	}
 }
 
-func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
+func (g *Game) Layout(outsideWidth, outsideHeight int) (ScreenWidth, ScreenHeight int) {
 	return outsideWidth, outsideHeight
 }
 
@@ -189,51 +185,6 @@ var (
 )
 
 var (
-	screenWidth  = 640
-	screenHeight = 480
+	ScreenWidth  = 640
+	ScreenHeight = 480
 )
-
-func main() {
-
-	// startingState := smarthome.GetFirstState(houses)
-	// states, result := smarthome.PlayGame(startingState)
-
-	// ebiten.SetWindowSize(1920, 1080)
-	// img, _, err := ebitenutil.NewImageFromFile("toastersmall.png")
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-
-	screenWidth, screenHeight = ebiten.ScreenSizeInFullscreen()
-
-	g := &Game{
-		// Image:      img,
-		// states:             states,
-		// result:             result,
-		applianceDimension: 128,
-
-		currentView: viewMenu,
-		// appliances: appliances,
-
-		menu: InitMenu(),
-	}
-
-	// ebiten.CurrentFPS()
-
-	ebiten.SetWindowTitle("Homebrawl")
-	// ebiten.SetWindowResizable(true)
-	ebiten.SetFullscreen(true)
-	// ebiten.IsFullscreen()
-	if err := ebiten.RunGame(g); err != nil {
-		log.Fatal(err)
-	}
-
-}
-
-// func main() {
-// 	ebiten.SetWindowSize(screenWidth, screenHeight)
-// 	ebiten.SetWindowTitle("Drag & Drop (Ebiten Demo)")
-// 	if err := ebiten.RunGame(NewGame()); err != nil {
-// 		log.Fatal(err)
-// 	}
-// }

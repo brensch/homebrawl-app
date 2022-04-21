@@ -1,4 +1,4 @@
-package main
+package homebrawlapp
 
 import (
 	"image/color"

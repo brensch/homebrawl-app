@@ -1,4 +1,4 @@
-package main
+package homebrawlapp
 
 import (
 	"github.com/brensch/smarthome"
@@ -21,8 +21,8 @@ const (
 func initSprite(appliance smarthome.Appliance) *Sprite {
 	return &Sprite{
 		appliance: appliance,
-		image:     ebiten.NewImage(screenWidth, SpriteHeight),
-		upgrade:   ebiten.NewImage(screenWidth, SpriteHeight),
+		image:     ebiten.NewImage(ScreenWidth, SpriteHeight),
+		upgrade:   ebiten.NewImage(ScreenWidth, SpriteHeight),
 		opts:      &ebiten.DrawImageOptions{},
 	}
 }

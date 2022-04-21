@@ -1,4 +1,4 @@
-package main
+package homebrawlapp
 
 // import (
 // 	"bytes"
@@ -20,8 +20,8 @@ package main
 // }
 
 // // const (
-// // 	screenWidth  = 640
-// // 	screenHeight = 480
+// // 	ScreenWidth  = 640
+// // 	ScreenHeight = 480
 // // )
 
 // // Sprite represents an image.
@@ -51,14 +51,14 @@ package main
 // 	if s.x < 0 {
 // 		s.x = 0
 // 	}
-// 	if s.x > screenWidth-w {
-// 		s.x = screenWidth - w
+// 	if s.x > ScreenWidth-w {
+// 		s.x = ScreenWidth - w
 // 	}
 // 	if s.y < 0 {
 // 		s.y = 0
 // 	}
-// 	if s.y > screenHeight-h {
-// 		s.y = screenHeight - h
+// 	if s.y > ScreenHeight-h {
+// 		s.y = ScreenHeight - h
 // 	}
 // }
 
@@ -193,8 +193,8 @@ package main
 // 	for i := 0; i < 50; i++ {
 // 		s := &Sprite{
 // 			image: ebitenImage,
-// 			x:     rand.Intn(screenWidth - w),
-// 			y:     rand.Intn(screenHeight - h),
+// 			x:     rand.Intn(ScreenWidth - w),
+// 			y:     rand.Intn(ScreenHeight - h),
 // 		}
 // 		sprites = append(sprites, s)
 // 	}
@@ -293,5 +293,5 @@ package main
 // }
 
 // func (g *Mover) Layout(outsideWidth, outsideHeight int) (int, int) {
-// 	return screenWidth, screenHeight
+// 	return ScreenWidth, ScreenHeight
 // }
